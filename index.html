@@ -1,0 +1,1539 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>COSMOS - Space Dashboard</title>
+    <link rel="icon" href="./assets/images/favicon.png" />
+    <script>
+      window.FontAwesomeConfig = { autoReplaceSvg: "nest" };
+    </script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" crossorigin href="./assets/css/style.css" />
+  </head>
+  <body
+    class="bg-linear-to-br from-space-dark via-slate-900 to-space-blue font-inter text-white"
+  >
+    <aside
+      id="sidebar"
+      class="fixed top-0 left-0 h-full w-64 bg-slate-900 border-r border-slate-800 flex flex-col transition-transform duration-300 sidebar-mobile"
+    >
+      <div class="p-4 border-b border-slate-800">
+        <div class="flex items-center space-x-3">
+          <div
+            class="w-10 h-10 bg-linear-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center"
+          >
+            <i class="fas fa-rocket text-white text-lg"></i>
+          </div>
+          <div>
+            <h1
+              class="text-lg font-space font-bold bg-linear-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent"
+            >
+              COSMOS
+            </h1>
+            <p class="text-xs text-slate-400">Space Dashboard</p>
+          </div>
+        </div>
+      </div>
+      <nav class="flex-1 p-4 space-y-1 overflow-y-auto">
+        <a
+          href="#"
+          data-section="today-in-space"
+          class="nav-link flex items-center space-x-3 px-3 py-2.5 bg-blue-500/10 text-blue-400 rounded-lg font-medium transition-colors"
+        >
+          <i class="fas fa-image w-5"></i>
+          <span>Today in Space</span>
+        </a>
+        <a
+          href="#"
+          data-section="launches"
+          class="nav-link flex items-center space-x-3 px-3 py-2.5 text-slate-300 hover:bg-slate-800 rounded-lg font-medium transition-colors"
+        >
+          <i class="fas fa-rocket w-5"></i>
+          <span>Launches</span>
+        </a>
+        <a
+          href="#"
+          data-section="planets"
+          class="nav-link flex items-center space-x-3 px-3 py-2.5 text-slate-300 hover:bg-slate-800 rounded-lg font-medium transition-colors"
+        >
+          <i class="fas fa-globe w-5"></i>
+          <span>Planets</span>
+        </a>
+      </nav>
+      <div class="p-4 border-t border-slate-800">
+        <div
+          class="flex items-center space-x-3 px-3 py-2 bg-slate-800 rounded-lg cursor-pointer hover:bg-slate-700 transition-colors"
+        >
+          <div
+            class="w-8 h-8 bg-linear-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center"
+          >
+            <i class="fas fa-user text-white text-sm"></i>
+          </div>
+          <div class="flex-1">
+            <p class="text-sm font-semibold">Space Explorer</p>
+            <p class="text-xs text-slate-400">explorer@cosmos.space</p>
+          </div>
+          <i class="fas fa-ellipsis-v text-slate-400"></i>
+        </div>
+      </div>
+    </aside>
+    <header
+      id="header"
+      class="fixed top-0 left-0 lg:left-64 right-0 z-40 bg-slate-900/95 backdrop-blur-md border-b border-slate-800"
+    >
+      <div class="px-4 lg:px-8 py-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-3 lg:space-x-6">
+            <button
+              id="sidebar-toggle"
+              class="lg:hidden w-10 h-10 flex items-center justify-center bg-slate-800 rounded-lg hover:bg-slate-700 transition-colors"
+            >
+              <i class="fas fa-bars text-white"></i>
+            </button>
+            <div>
+              <h2
+                class="text-lg lg:text-xl font-space font-bold bg-linear-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent"
+              >
+                Space Explorer Dashboard
+              </h2>
+              <p class="text-xs text-slate-400 mt-0.5 hidden sm:block">
+                Real-time space data from NASA & SpaceDevs
+              </p>
+            </div>
+          </div>
+          <div class="flex items-center space-x-2 md:space-x-4">
+            <div
+              class="flex items-center space-x-2 md:space-x-3 px-2 md:px-4 py-2 bg-slate-800/50 border border-slate-700 rounded-xl"
+            >
+              <div class="flex items-center space-x-1 md:space-x-2">
+                <div
+                  class="w-2 h-2 bg-green-500 rounded-full animate-pulse"
+                ></div>
+                <span class="text-xs text-slate-400 hidden sm:inline"
+                  >Live Data</span
+                >
+              </div>
+              <div class="w-px h-4 bg-slate-700 hidden sm:block"></div>
+              <div class="flex items-center space-x-1 md:space-x-2">
+                <i class="fas fa-globe text-blue-400 text-sm"></i>
+                <span
+                  class="text-xs text-slate-300 font-semibold hidden sm:inline"
+                  >8 Planets</span
+                >
+                <span class="text-xs text-slate-300 font-semibold sm:hidden"
+                  >8</span
+                >
+              </div>
+              <div class="w-px h-4 bg-slate-700 hidden sm:block"></div>
+              <div class="flex items-center space-x-1 md:space-x-2">
+                <i class="fas fa-rocket text-purple-400 text-sm"></i>
+                <span
+                  class="text-xs text-slate-300 font-semibold hidden sm:inline"
+                  id="launches-count"
+                  >10 Launches</span
+                >
+                <span
+                  class="text-xs text-slate-300 font-semibold sm:hidden"
+                  id="launches-count-mobile"
+                  >10</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="ml-0 lg:ml-64 mt-[90px]">
+      <section
+        id="today-in-space"
+        data-section="today-in-space"
+        class="app-section min-h-screen py-4 lg:py-8 px-4 lg:px-6 bg-slate-900/50"
+      >
+        <div class="max-w-7xl mx-auto">
+          <div
+            class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6"
+          >
+            <div>
+              <h2 class="text-xl md:text-2xl font-space font-bold mb-1">
+                Today in Space
+              </h2>
+              <p id="apod-date" class="text-slate-400 text-xs md:text-sm">
+                Astronomy Picture of the Day - March 14, 2024
+              </p>
+            </div>
+            <div class="flex items-center space-x-2 md:space-x-3">
+              <label for="apod-date-input" class="date-input-wrapper">
+                <input
+                  type="date"
+                  id="apod-date-input"
+                  class="custom-date-input"
+                  value="2024-03-14"
+                  max=""
+                  min="1995-06-16"
+                />
+                <span class="text-sm">Dec 17, 2025</span>
+              </label>
+              <button
+                id="load-date-btn"
+                class="px-3 md:px-4 py-2 bg-blue-500 rounded-xl hover:bg-blue-600 transition-colors font-semibold text-sm flex items-center space-x-1 md:space-x-2"
+              >
+                <i class="fas fa-search"></i>
+                <span class="hidden sm:inline">Load</span>
+              </button>
+              <button
+                id="today-apod-btn"
+                class="px-3 md:px-4 py-2 bg-slate-800 border border-slate-700 rounded-xl hover:bg-slate-700 transition-colors font-semibold text-sm"
+              >
+                Today
+              </button>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 xl:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
+            <div class="xl:col-span-2">
+              <div
+                id="apod-image-container"
+                class="relative rounded-2xl overflow-hidden group h-[300px] md:h-[400px] lg:h-[600px] bg-slate-800/50 flex items-center justify-center"
+              >
+                <div id="apod-loading" class="text-center hidden">
+                  <i
+                    class="fas fa-spinner fa-spin text-4xl text-blue-400 mb-4"
+                  ></i>
+                  <p class="text-slate-400">Loading today's image...</p>
+                </div>
+                <!-- Using a placeholder image or one from assets if available. Using a reliable external placeholder for now or a relative path if we knew one. Sticking to a colored placeholder div if no image, but let's try a realistic placeholder or just the rocket icon style used elsewhere if we want to be safe. But user wants design. I'll use a relative path assuming assets exist or a generic space placeholder. -->
+                <img
+                  id="apod-image"
+                  class="w-full h-full object-cover"
+                  src="./assets/images/placeholder.webp"
+                  alt="Astronomy Picture of the Day"
+                />
+                <div
+                  class="absolute inset-0 bg-linear-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"
+                >
+                  <div class="absolute bottom-6 left-6 right-6">
+                    <button
+                      class="w-full py-3 bg-white/10 backdrop-blur-md rounded-lg font-semibold hover:bg-white/20 transition-colors"
+                    >
+                      <i class="fas fa-expand mr-2"></i>View Full Resolution
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="space-y-4 md:space-y-6">
+              <div
+                class="bg-slate-800/50 border border-slate-700 rounded-xl md:rounded-2xl p-4 md:p-6"
+              >
+                <h3
+                  id="apod-title"
+                  class="text-lg md:text-2xl font-semibold mb-3 md:mb-4"
+                >
+                  The Rosette Nebula
+                </h3>
+                <div
+                  class="flex items-center space-x-4 mb-4 text-sm text-slate-400"
+                >
+                  <span id="apod-date-detail"
+                    ><i class="far fa-calendar mr-2"></i>2024-03-14</span
+                  >
+                </div>
+                <p
+                  id="apod-explanation"
+                  class="text-slate-300 leading-relaxed mb-4"
+                >
+                  The Rosette Nebula is a large spherical H II region located
+                  near one end of a giant molecular cloud in the Monoceros
+                  region of the Milky Way Galaxy. The open cluster NGC 2244
+                  (Caldwell 50) is closely associated with the nebulosity, the
+                  stars of the cluster having been formed from the nebula's
+                  matter.
+                </p>
+                <div
+                  id="apod-copyright"
+                  class="text-xs text-slate-400 italic mb-4"
+                >
+                  &copy; NASA/JPL
+                </div>
+              </div>
+              <div
+                class="bg-slate-800/50 border border-slate-700 rounded-2xl p-6"
+              >
+                <h4 class="font-semibold mb-3 flex items-center">
+                  <i class="fas fa-info-circle text-blue-400 mr-2"></i>
+                  Image Details
+                </h4>
+                <div class="space-y-3 text-sm">
+                  <div class="flex justify-between">
+                    <span class="text-slate-400">Date</span>
+                    <span id="apod-date-info" class="font-medium"
+                      >2024-03-14</span
+                    >
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-slate-400">Media Type</span>
+                    <span id="apod-media-type" class="font-medium">Image</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-slate-400">Source</span>
+                    <span class="font-medium">NASA APOD</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="launches"
+        data-section="launches"
+        class="app-section hidden py-4 lg:py-8 px-4 lg:px-6 bg-slate-900/50"
+      >
+        <div class="max-w-7xl mx-auto">
+          <div class="mb-6 md:mb-8">
+            <h2 class="text-2xl md:text-3xl font-space font-bold mb-2">
+              Upcoming Launches
+            </h2>
+            <p class="text-slate-400 text-sm md:text-base">
+              Real-time tracking of the next missions to space
+            </p>
+          </div>
+          <div id="featured-launch" class="mb-8">
+            <!-- STATIC FEATURED LAUNCH -->
+            <div
+              class="relative bg-slate-800/30 border border-slate-700 rounded-3xl overflow-hidden group hover:border-blue-500/50 transition-all"
+            >
+              <div
+                class="absolute inset-0 bg-linear-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity"
+              ></div>
+              <div class="relative grid grid-cols-1 lg:grid-cols-2 gap-6 p-8">
+                <div class="flex flex-col justify-between">
+                  <div>
+                    <div class="flex items-center gap-3 mb-4">
+                      <span
+                        class="px-4 py-1.5 bg-blue-500/20 text-blue-400 rounded-full text-sm font-semibold flex items-center gap-2"
+                      >
+                        <i class="fas fa-star"></i>
+                        Featured Launch
+                      </span>
+                      <span
+                        class="px-4 py-1.5 bg-green-500/20 text-green-400 rounded-full text-sm font-semibold"
+                      >
+                        Go
+                      </span>
+                    </div>
+                    <h3 class="text-3xl font-bold mb-3 leading-tight">
+                      Starship Flight 3
+                    </h3>
+                    <div
+                      class="flex flex-col xl:flex-row xl:items-center gap-4 mb-6 text-slate-400"
+                    >
+                      <div class="flex items-center gap-2">
+                        <i class="fas fa-building"></i>
+                        <span>SpaceX</span>
+                      </div>
+                      <div class="flex items-center gap-2">
+                        <i class="fas fa-rocket"></i>
+                        <span>Starship</span>
+                      </div>
+                    </div>
+                    <div
+                      class="inline-flex items-center gap-3 px-6 py-3 bg-linear-to-r from-blue-500/20 to-purple-500/20 rounded-xl mb-6"
+                    >
+                      <i class="fas fa-clock text-2xl text-blue-400"></i>
+                      <div>
+                        <p class="text-2xl font-bold text-blue-400">2</p>
+                        <p class="text-xs text-slate-400">Days Until Launch</p>
+                      </div>
+                    </div>
+                    <div class="grid xl:grid-cols-2 gap-4 mb-6">
+                      <div class="bg-slate-900/50 rounded-xl p-4">
+                        <p
+                          class="text-xs text-slate-400 mb-1 flex items-center gap-2"
+                        >
+                          <i class="fas fa-calendar"></i>
+                          Launch Date
+                        </p>
+                        <p class="font-semibold">March 14, 2024</p>
+                      </div>
+                      <div class="bg-slate-900/50 rounded-xl p-4">
+                        <p
+                          class="text-xs text-slate-400 mb-1 flex items-center gap-2"
+                        >
+                          <i class="fas fa-clock"></i>
+                          Launch Time
+                        </p>
+                        <p class="font-semibold">12:00 PM UTC</p>
+                      </div>
+                      <div class="bg-slate-900/50 rounded-xl p-4">
+                        <p
+                          class="text-xs text-slate-400 mb-1 flex items-center gap-2"
+                        >
+                          <i class="fas fa-map-marker-alt"></i>
+                          Location
+                        </p>
+                        <p class="font-semibold text-sm">Starbase, Texas</p>
+                      </div>
+                      <div class="bg-slate-900/50 rounded-xl p-4">
+                        <p
+                          class="text-xs text-slate-400 mb-1 flex items-center gap-2"
+                        >
+                          <i class="fas fa-globe"></i>
+                          Country
+                        </p>
+                        <p class="font-semibold">USA</p>
+                      </div>
+                    </div>
+                    <p class="text-slate-300 leading-relaxed mb-6">
+                      The third integrated flight test of Starship. The
+                      prototype for the heavy-lift launch vehicle is currently
+                      being built by SpaceX.
+                    </p>
+                  </div>
+                  <div class="flex flex-col md:flex-row gap-3">
+                    <button
+                      class="flex-1 self-start md:self-center px-6 py-3 bg-blue-500 rounded-xl hover:bg-blue-600 transition-colors font-semibold flex items-center justify-center gap-2"
+                    >
+                      <i class="fas fa-info-circle"></i>
+                      View Full Details
+                    </button>
+                    <div class="icons self-end md:self-center">
+                      <button
+                        class="px-4 py-3 bg-slate-700 rounded-xl hover:bg-slate-600 transition-colors"
+                      >
+                        <i class="far fa-heart"></i>
+                      </button>
+                      <button
+                        class="px-4 py-3 bg-slate-700 rounded-xl hover:bg-slate-600 transition-colors"
+                      >
+                        <i class="fas fa-bell"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="relative">
+                  <div
+                    class="relative h-full min-h-[400px] rounded-2xl overflow-hidden bg-slate-900/50"
+                  >
+                    <!-- Placeholder image/icon since we can't load external images reliably without correct URLs -->
+                    <div
+                      class="flex items-center justify-center h-full min-h-[400px] bg-slate-800"
+                    >
+                      <i class="fas fa-rocket text-9xl text-slate-700/50"></i>
+                    </div>
+                    <div
+                      class="absolute inset-0 bg-linear-to-t from-slate-900 via-transparent to-transparent"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mb-6">
+            <h3 class="text-xl font-semibold mb-4">All Upcoming Launches</h3>
+          </div>
+          <div
+            id="launches-grid"
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
+            <!-- STATIC LAUNCH CARD 1 -->
+            <div
+              class="bg-slate-800/50 border border-slate-700 rounded-2xl overflow-hidden hover:border-blue-500/30 transition-all group cursor-pointer"
+            >
+              <div
+                class="relative h-48 bg-slate-900/50 flex items-center justify-center"
+              >
+                <i class="fas fa-space-shuttle text-5xl text-slate-700"></i>
+                <div class="absolute top-3 right-3">
+                  <span
+                    class="px-3 py-1 bg-green-500/90 text-white backdrop-blur-sm rounded-full text-xs font-semibold"
+                  >
+                    Go
+                  </span>
+                </div>
+              </div>
+              <div class="p-5">
+                <div class="mb-3">
+                  <h4
+                    class="font-bold text-lg mb-2 line-clamp-2 group-hover:text-blue-400 transition-colors"
+                  >
+                    Falcon 9 Block 5 | Starlink Group 6-44
+                  </h4>
+                  <p class="text-sm text-slate-400 flex items-center gap-2">
+                    <i class="fas fa-building text-xs"></i>
+                    SpaceX
+                  </p>
+                </div>
+                <div class="space-y-2 mb-4">
+                  <div class="flex items-center gap-2 text-sm">
+                    <i class="fas fa-calendar text-slate-500 w-4"></i>
+                    <span class="text-slate-300">Mar 15, 2024</span>
+                  </div>
+                  <div class="flex items-center gap-2 text-sm">
+                    <i class="fas fa-clock text-slate-500 w-4"></i>
+                    <span class="text-slate-300">23:00 UTC</span>
+                  </div>
+                  <div class="flex items-center gap-2 text-sm">
+                    <i class="fas fa-rocket text-slate-500 w-4"></i>
+                    <span class="text-slate-300">Falcon 9</span>
+                  </div>
+                  <div class="flex items-center gap-2 text-sm">
+                    <i class="fas fa-map-marker-alt text-slate-500 w-4"></i>
+                    <span class="text-slate-300 line-clamp-1">KSC, LC-39A</span>
+                  </div>
+                </div>
+                <div
+                  class="flex items-center gap-2 pt-4 border-t border-slate-700"
+                >
+                  <button
+                    class="flex-1 px-4 py-2 bg-slate-700 rounded-lg hover:bg-slate-600 transition-colors text-sm font-semibold"
+                  >
+                    Details
+                  </button>
+                  <button
+                    class="px-3 py-2 bg-slate-700 rounded-lg hover:bg-slate-600 transition-colors"
+                  >
+                    <i class="far fa-heart"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- STATIC LAUNCH CARD 2 -->
+            <div
+              class="bg-slate-800/50 border border-slate-700 rounded-2xl overflow-hidden hover:border-blue-500/30 transition-all group cursor-pointer"
+            >
+              <div
+                class="relative h-48 bg-slate-900/50 flex items-center justify-center"
+              >
+                <i class="fas fa-rocket text-5xl text-slate-700"></i>
+                <div class="absolute top-3 right-3">
+                  <span
+                    class="px-3 py-1 bg-yellow-500/90 text-white backdrop-blur-sm rounded-full text-xs font-semibold"
+                  >
+                    TBC
+                  </span>
+                </div>
+              </div>
+              <div class="p-5">
+                <div class="mb-3">
+                  <h4
+                    class="font-bold text-lg mb-2 line-clamp-2 group-hover:text-blue-400 transition-colors"
+                  >
+                    Electron | "Owl Night Long"
+                  </h4>
+                  <p class="text-sm text-slate-400 flex items-center gap-2">
+                    <i class="fas fa-building text-xs"></i>
+                    Rocket Lab
+                  </p>
+                </div>
+                <div class="space-y-2 mb-4">
+                  <div class="flex items-center gap-2 text-sm">
+                    <i class="fas fa-calendar text-slate-500 w-4"></i>
+                    <span class="text-slate-300">Mar 16, 2024</span>
+                  </div>
+                  <div class="flex items-center gap-2 text-sm">
+                    <i class="fas fa-clock text-slate-500 w-4"></i>
+                    <span class="text-slate-300">09:15 UTC</span>
+                  </div>
+                  <div class="flex items-center gap-2 text-sm">
+                    <i class="fas fa-rocket text-slate-500 w-4"></i>
+                    <span class="text-slate-300">Electron</span>
+                  </div>
+                  <div class="flex items-center gap-2 text-sm">
+                    <i class="fas fa-map-marker-alt text-slate-500 w-4"></i>
+                    <span class="text-slate-300 line-clamp-1"
+                      >Mahia Peninsula, NZ</span
+                    >
+                  </div>
+                </div>
+                <div
+                  class="flex items-center gap-2 pt-4 border-t border-slate-700"
+                >
+                  <button
+                    class="flex-1 px-4 py-2 bg-slate-700 rounded-lg hover:bg-slate-600 transition-colors text-sm font-semibold"
+                  >
+                    Details
+                  </button>
+                  <button
+                    class="px-3 py-2 bg-slate-700 rounded-lg hover:bg-slate-600 transition-colors"
+                  >
+                    <i class="far fa-heart"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- STATIC LAUNCH CARD 3 -->
+            <div
+              class="bg-slate-800/50 border border-slate-700 rounded-2xl overflow-hidden hover:border-blue-500/30 transition-all group cursor-pointer"
+            >
+              <div
+                class="relative h-48 bg-slate-900/50 flex items-center justify-center"
+              >
+                <i class="fas fa-satellite-dish text-5xl text-slate-700"></i>
+                <div class="absolute top-3 right-3">
+                  <span
+                    class="px-3 py-1 bg-blue-500/90 text-white backdrop-blur-sm rounded-full text-xs font-semibold"
+                  >
+                    TBD
+                  </span>
+                </div>
+              </div>
+              <div class="p-5">
+                <div class="mb-3">
+                  <h4
+                    class="font-bold text-lg mb-2 line-clamp-2 group-hover:text-blue-400 transition-colors"
+                  >
+                    Ariane 6 | Maiden Flight
+                  </h4>
+                  <p class="text-sm text-slate-400 flex items-center gap-2">
+                    <i class="fas fa-building text-xs"></i>
+                    Arianespace
+                  </p>
+                </div>
+                <div class="space-y-2 mb-4">
+                  <div class="flex items-center gap-2 text-sm">
+                    <i class="fas fa-calendar text-slate-500 w-4"></i>
+                    <span class="text-slate-300">June 2024</span>
+                  </div>
+                  <div class="flex items-center gap-2 text-sm">
+                    <i class="fas fa-clock text-slate-500 w-4"></i>
+                    <span class="text-slate-300">TBD</span>
+                  </div>
+                  <div class="flex items-center gap-2 text-sm">
+                    <i class="fas fa-rocket text-slate-500 w-4"></i>
+                    <span class="text-slate-300">Ariane 62</span>
+                  </div>
+                  <div class="flex items-center gap-2 text-sm">
+                    <i class="fas fa-map-marker-alt text-slate-500 w-4"></i>
+                    <span class="text-slate-300 line-clamp-1"
+                      >Guiana Space Centre</span
+                    >
+                  </div>
+                </div>
+                <div
+                  class="flex items-center gap-2 pt-4 border-t border-slate-700"
+                >
+                  <button
+                    class="flex-1 px-4 py-2 bg-slate-700 rounded-lg hover:bg-slate-600 transition-colors text-sm font-semibold"
+                  >
+                    Details
+                  </button>
+                  <button
+                    class="px-3 py-2 bg-slate-700 rounded-lg hover:bg-slate-600 transition-colors"
+                  >
+                    <i class="far fa-heart"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="planets"
+        data-section="planets"
+        class="app-section hidden py-4 lg:py-8 px-4 lg:px-6 bg-slate-900/50"
+      >
+        <div class="max-w-7xl mx-auto">
+          <div class="mb-4 md:mb-6">
+            <h2 class="text-xl md:text-2xl font-space font-bold mb-1">
+              Explore Our Solar System
+            </h2>
+            <p class="text-slate-400 text-xs md:text-sm">
+              Discover the planets, moons, and celestial bodies in our cosmic
+              neighborhood
+            </p>
+          </div>
+          <div
+            id="planets-grid"
+            class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-4 xl:grid-cols-8 gap-3 md:gap-4 mb-8 md:mb-12"
+          >
+            <!-- Mercury -->
+            <div
+              class="planet-card bg-slate-800/50 border border-slate-700 rounded-2xl p-4 transition-all cursor-pointer group"
+              data-planet-id="mercury"
+              style="--planet-color: #eab308"
+              onmouseover="this.style.borderColor='#eab30880'"
+              onmouseout="this.style.borderColor='#334155'"
+            >
+              <div class="relative mb-3 h-24 flex items-center justify-center">
+                <img
+                  class="w-20 h-20 object-contain group-hover:scale-110 transition-transform"
+                  src="./assets/images/mercury.png"
+                  alt="Mercury"
+                />
+              </div>
+              <h4 class="font-semibold text-center text-sm">Mercury</h4>
+              <p class="text-xs text-slate-400 text-center">0.39 AU</p>
+            </div>
+            <!-- Venus -->
+            <div
+              class="planet-card bg-slate-800/50 border border-slate-700 rounded-2xl p-4 transition-all cursor-pointer group"
+              data-planet-id="venus"
+              style="--planet-color: #f97316"
+              onmouseover="this.style.borderColor='#f9731680'"
+              onmouseout="this.style.borderColor='#334155'"
+            >
+              <div class="relative mb-3 h-24 flex items-center justify-center">
+                <img
+                  class="w-20 h-20 object-contain group-hover:scale-110 transition-transform"
+                  src="./assets/images/venus.png"
+                  alt="Venus"
+                />
+              </div>
+              <h4 class="font-semibold text-center text-sm">Venus</h4>
+              <p class="text-xs text-slate-400 text-center">0.72 AU</p>
+            </div>
+            <!-- Earth -->
+            <div
+              class="planet-card bg-slate-800/50 border border-slate-700 rounded-2xl p-4 transition-all cursor-pointer group"
+              data-planet-id="earth"
+              style="--planet-color: #3b82f6"
+              onmouseover="this.style.borderColor='#3b82f680'"
+              onmouseout="this.style.borderColor='#334155'"
+            >
+              <div class="relative mb-3 h-24 flex items-center justify-center">
+                <img
+                  class="w-20 h-20 object-contain group-hover:scale-110 transition-transform"
+                  src="./assets/images/earth.png"
+                  alt="Earth"
+                />
+              </div>
+              <h4 class="font-semibold text-center text-sm">Earth</h4>
+              <p class="text-xs text-slate-400 text-center">1.00 AU</p>
+            </div>
+            <!-- Mars -->
+            <div
+              class="planet-card bg-slate-800/50 border border-slate-700 rounded-2xl p-4 transition-all cursor-pointer group"
+              data-planet-id="mars"
+              style="--planet-color: #ef4444"
+              onmouseover="this.style.borderColor='#ef444480'"
+              onmouseout="this.style.borderColor='#334155'"
+            >
+              <div class="relative mb-3 h-24 flex items-center justify-center">
+                <img
+                  class="w-20 h-20 object-contain group-hover:scale-110 transition-transform"
+                  src="./assets/images/mars.png"
+                  alt="Mars"
+                />
+              </div>
+              <h4 class="font-semibold text-center text-sm">Mars</h4>
+              <p class="text-xs text-slate-400 text-center">1.52 AU</p>
+            </div>
+            <!-- Jupiter -->
+            <div
+              class="planet-card bg-slate-800/50 border border-slate-700 rounded-2xl p-4 transition-all cursor-pointer group"
+              data-planet-id="jupiter"
+              style="--planet-color: #fb923c"
+              onmouseover="this.style.borderColor='#fb923c80'"
+              onmouseout="this.style.borderColor='#334155'"
+            >
+              <div class="relative mb-3 h-24 flex items-center justify-center">
+                <img
+                  class="w-20 h-20 object-contain group-hover:scale-110 transition-transform"
+                  src="./assets/images/jupiter.png"
+                  alt="Jupiter"
+                />
+              </div>
+              <h4 class="font-semibold text-center text-sm">Jupiter</h4>
+              <p class="text-xs text-slate-400 text-center">5.20 AU</p>
+            </div>
+            <!-- Saturn -->
+            <div
+              class="planet-card bg-slate-800/50 border border-slate-700 rounded-2xl p-4 transition-all cursor-pointer group"
+              data-planet-id="saturn"
+              style="--planet-color: #facc15"
+              onmouseover="this.style.borderColor='#facc1580'"
+              onmouseout="this.style.borderColor='#334155'"
+            >
+              <div class="relative mb-3 h-24 flex items-center justify-center">
+                <img
+                  class="w-20 h-20 object-contain group-hover:scale-110 transition-transform"
+                  src="./assets/images/saturn.png"
+                  alt="Saturn"
+                />
+              </div>
+              <h4 class="font-semibold text-center text-sm">Saturn</h4>
+              <p class="text-xs text-slate-400 text-center">9.58 AU</p>
+            </div>
+            <!-- Uranus -->
+            <div
+              class="planet-card bg-slate-800/50 border border-slate-700 rounded-2xl p-4 transition-all cursor-pointer group"
+              data-planet-id="uranus"
+              style="--planet-color: #06b6d4"
+              onmouseover="this.style.borderColor='#06b6d480'"
+              onmouseout="this.style.borderColor='#334155'"
+            >
+              <div class="relative mb-3 h-24 flex items-center justify-center">
+                <img
+                  class="w-20 h-20 object-contain group-hover:scale-110 transition-transform"
+                  src="./assets/images/uranus.png"
+                  alt="Uranus"
+                />
+              </div>
+              <h4 class="font-semibold text-center text-sm">Uranus</h4>
+              <p class="text-xs text-slate-400 text-center">19.22 AU</p>
+            </div>
+            <!-- Neptune -->
+            <div
+              class="planet-card bg-slate-800/50 border border-slate-700 rounded-2xl p-4 transition-all cursor-pointer group"
+              data-planet-id="neptune"
+              style="--planet-color: #2563eb"
+              onmouseover="this.style.borderColor='#2563eb80'"
+              onmouseout="this.style.borderColor='#334155'"
+            >
+              <div class="relative mb-3 h-24 flex items-center justify-center">
+                <img
+                  class="w-20 h-20 object-contain group-hover:scale-110 transition-transform"
+                  src="./assets/images/neptune.png"
+                  alt="Neptune"
+                />
+              </div>
+              <h4 class="font-semibold text-center text-sm">Neptune</h4>
+              <p class="text-xs text-slate-400 text-center">30.05 AU</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 xl:grid-cols-3 gap-4 md:gap-6">
+            <div
+              class="xl:col-span-2 bg-slate-800/50 border border-slate-700 rounded-xl md:rounded-2xl p-4 md:p-6 lg:p-8"
+            >
+              <div
+                class="flex flex-col xl:flex-row xl:items-start space-y-4 xl:space-y-0"
+              >
+                <div
+                  class="relative h-48 w-48 md:h-64 md:w-64 shrink-0 mx-auto xl:mr-6"
+                >
+                  <img
+                    id="planet-detail-image"
+                    class="w-full h-full object-contain"
+                    src="./assets/images/earth.png"
+                    alt="earth planet detailed realistic render with clouds and continents"
+                  />
+                </div>
+                <div class="flex-1">
+                  <div class="flex items-center justify-between mb-3 md:mb-4">
+                    <h3
+                      id="planet-detail-name"
+                      class="text-2xl md:text-3xl font-space font-bold"
+                    >
+                      Earth
+                    </h3>
+                    <button
+                      class="w-10 h-10 bg-slate-700 rounded-lg hover:bg-slate-600 transition-colors"
+                    >
+                      <i class="far fa-heart"></i>
+                    </button>
+                  </div>
+                  <p
+                    id="planet-detail-description"
+                    class="text-slate-300 mb-4 md:mb-6 leading-relaxed text-sm md:text-base"
+                  >
+                    Earth is the third planet from the Sun and the only
+                    astronomical object known to harbor life. About 29% of
+                    Earth's surface is land consisting of continents and
+                    islands. The remaining 71% is covered with water, mostly by
+                    oceans, seas, gulfs, and other salt-water bodies, but also
+                    by lakes, rivers, and other fresh water, which together
+                    constitute the hydrosphere.
+                  </p>
+                </div>
+              </div>
+              <div class="grid grid-cols-2 gap-2 md:gap-4 mt-4">
+                <div class="bg-slate-900/50 rounded-lg p-3 md:p-4">
+                  <p
+                    class="text-xs text-slate-400 mb-1 flex items-center gap-1"
+                  >
+                    <i class="fas fa-ruler text-xs"></i>
+                    <span class="text-xs">Semimajor Axis</span>
+                  </p>
+                  <p
+                    id="planet-distance"
+                    class="text-sm md:text-lg font-semibold"
+                  >
+                    149.6M km
+                  </p>
+                </div>
+                <div class="bg-slate-900/50 rounded-lg p-4">
+                  <p
+                    class="text-xs text-slate-400 mb-1 flex items-center gap-1"
+                  >
+                    <i class="fas fa-circle"></i>
+                    Mean Radius
+                  </p>
+                  <p id="planet-radius" class="text-lg font-semibold">
+                    6,371 km
+                  </p>
+                </div>
+                <div class="bg-slate-900/50 rounded-lg p-4">
+                  <p
+                    class="text-xs text-slate-400 mb-1 flex items-center gap-1"
+                  >
+                    <i class="fas fa-weight"></i>
+                    Mass
+                  </p>
+                  <p id="planet-mass" class="text-lg font-semibold">
+                    5.97 × 10²⁴ kg
+                  </p>
+                </div>
+                <div class="bg-slate-900/50 rounded-lg p-4">
+                  <p
+                    class="text-xs text-slate-400 mb-1 flex items-center gap-1"
+                  >
+                    <i class="fas fa-compress"></i>
+                    Density
+                  </p>
+                  <p id="planet-density" class="text-lg font-semibold">
+                    5.51 g/cm³
+                  </p>
+                </div>
+                <div class="bg-slate-900/50 rounded-lg p-4">
+                  <p
+                    class="text-xs text-slate-400 mb-1 flex items-center gap-1"
+                  >
+                    <i class="fas fa-sync-alt"></i>
+                    Orbital Period
+                  </p>
+                  <p id="planet-orbital-period" class="text-lg font-semibold">
+                    365.25 days
+                  </p>
+                </div>
+                <div class="bg-slate-900/50 rounded-lg p-4">
+                  <p
+                    class="text-xs text-slate-400 mb-1 flex items-center gap-1"
+                  >
+                    <i class="fas fa-redo"></i>
+                    Rotation Period
+                  </p>
+                  <p id="planet-rotation" class="text-lg font-semibold">
+                    24 hours
+                  </p>
+                </div>
+                <div class="bg-slate-900/50 rounded-lg p-4">
+                  <p
+                    class="text-xs text-slate-400 mb-1 flex items-center gap-1"
+                  >
+                    <i class="fas fa-moon"></i>
+                    Moons
+                  </p>
+                  <p id="planet-moons" class="text-lg font-semibold">1</p>
+                </div>
+                <div class="bg-slate-900/50 rounded-lg p-4">
+                  <p
+                    class="text-xs text-slate-400 mb-1 flex items-center gap-1"
+                  >
+                    <i class="fas fa-arrows-alt-v"></i>
+                    Gravity
+                  </p>
+                  <p id="planet-gravity" class="text-lg font-semibold">
+                    9.8 m/s²
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="space-y-6">
+              <div
+                class="bg-slate-800/50 border border-slate-700 rounded-2xl p-6"
+              >
+                <h4 class="font-semibold mb-4 flex items-center">
+                  <i class="fas fa-user-astronaut text-purple-400 mr-2"></i>
+                  Discovery Info
+                </h4>
+                <div class="space-y-3 text-sm">
+                  <div
+                    class="flex justify-between items-center py-2 border-b border-slate-700"
+                  >
+                    <span class="text-slate-400">Discovered By</span>
+                    <span
+                      id="planet-discoverer"
+                      class="font-semibold text-right"
+                      >Known since antiquity</span
+                    >
+                  </div>
+                  <div
+                    class="flex justify-between items-center py-2 border-b border-slate-700"
+                  >
+                    <span class="text-slate-400">Discovery Date</span>
+                    <span id="planet-discovery-date" class="font-semibold"
+                      >Ancient</span
+                    >
+                  </div>
+                  <div
+                    class="flex justify-between items-center py-2 border-b border-slate-700"
+                  >
+                    <span class="text-slate-400">Body Type</span>
+                    <span id="planet-body-type" class="font-semibold"
+                      >Planet</span
+                    >
+                  </div>
+                  <div class="flex justify-between items-center py-2">
+                    <span class="text-slate-400">Volume</span>
+                    <span id="planet-volume" class="font-semibold">N/A</span>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="bg-slate-800/50 border border-slate-700 rounded-2xl p-6"
+              >
+                <h4 class="font-semibold mb-4 flex items-center">
+                  <i class="fas fa-lightbulb text-yellow-400 mr-2"></i>
+                  Quick Facts
+                </h4>
+                <ul id="planet-facts" class="space-y-3 text-sm">
+                  <li class="flex items-start">
+                    <i class="fas fa-check text-green-400 mt-1 mr-2"></i>
+                    <span class="text-slate-300"
+                      >Only known planet with liquid water</span
+                    >
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-check text-green-400 mt-1 mr-2"></i>
+                    <span class="text-slate-300"
+                      >Atmosphere contains 78% nitrogen</span
+                    >
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-check text-green-400 mt-1 mr-2"></i>
+                    <span class="text-slate-300"
+                      >Magnetic field protects from solar wind</span
+                    >
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-check text-green-400 mt-1 mr-2"></i>
+                    <span class="text-slate-300"
+                      >Formed 4.54 billion years ago</span
+                    >
+                  </li>
+                </ul>
+              </div>
+              <div
+                class="bg-slate-800/50 border border-slate-700 rounded-2xl p-6"
+              >
+                <h4 class="font-semibold mb-4 flex items-center">
+                  <i class="fas fa-satellite text-blue-400 mr-2"></i>
+                  Orbital Characteristics
+                </h4>
+                <div class="space-y-3 text-sm">
+                  <div
+                    class="flex justify-between items-center py-2 border-b border-slate-700"
+                  >
+                    <span class="text-slate-400">Perihelion</span>
+                    <span id="planet-perihelion" class="font-semibold"
+                      >147.1M km</span
+                    >
+                  </div>
+                  <div
+                    class="flex justify-between items-center py-2 border-b border-slate-700"
+                  >
+                    <span class="text-slate-400">Aphelion</span>
+                    <span id="planet-aphelion" class="font-semibold"
+                      >152.1M km</span
+                    >
+                  </div>
+                  <div
+                    class="flex justify-between items-center py-2 border-b border-slate-700"
+                  >
+                    <span class="text-slate-400">Eccentricity</span>
+                    <span id="planet-eccentricity" class="font-semibold"
+                      >0.0167</span
+                    >
+                  </div>
+                  <div
+                    class="flex justify-between items-center py-2 border-b border-slate-700"
+                  >
+                    <span class="text-slate-400">Inclination</span>
+                    <span id="planet-inclination" class="font-semibold"
+                      >0.00°</span
+                    >
+                  </div>
+                  <div
+                    class="flex justify-between items-center py-2 border-b border-slate-700"
+                  >
+                    <span class="text-slate-400">Axial Tilt</span>
+                    <span id="planet-axial-tilt" class="font-semibold"
+                      >23.44°</span
+                    >
+                  </div>
+                  <div
+                    class="flex justify-between items-center py-2 border-b border-slate-700"
+                  >
+                    <span class="text-slate-400">Avg Temperature</span>
+                    <span id="planet-temp" class="font-semibold">15°C</span>
+                  </div>
+                  <div class="flex justify-between items-center py-2">
+                    <span class="text-slate-400">Escape Velocity</span>
+                    <span id="planet-escape" class="font-semibold"
+                      >11.2 km/s</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <button
+                class="w-full py-3 bg-blue-500 rounded-lg hover:bg-blue-600 transition-colors font-semibold"
+              >
+                <i class="fas fa-book mr-2"></i>Learn More
+              </button>
+            </div>
+          </div>
+          <div class="mt-8">
+            <h2 class="text-xl md:text-2xl font-space font-bold mb-4 md:mb-6">
+              Planet Comparison
+            </h2>
+            <div
+              class="bg-slate-800/50 border border-slate-700 rounded-xl md:rounded-2xl overflow-hidden"
+            >
+              <div class="overflow-x-auto custom-scrollbar">
+                <table class="w-full min-w-[800px]">
+                  <thead class="bg-slate-900/50">
+                    <tr>
+                      <th
+                        class="px-4 md:px-6 py-3 md:py-4 text-left text-xs md:text-sm font-semibold whitespace-nowrap sticky left-0 bg-slate-900 z-10"
+                      >
+                        Planet
+                      </th>
+                      <th
+                        class="px-4 md:px-6 py-3 md:py-4 text-left text-xs md:text-sm font-semibold whitespace-nowrap"
+                      >
+                        Distance (AU)
+                      </th>
+                      <th
+                        class="px-4 md:px-6 py-3 md:py-4 text-left text-xs md:text-sm font-semibold whitespace-nowrap"
+                      >
+                        Diameter (km)
+                      </th>
+                      <th
+                        class="px-4 md:px-6 py-3 md:py-4 text-left text-xs md:text-sm font-semibold whitespace-nowrap"
+                      >
+                        Mass (Earth=1)
+                      </th>
+                      <th
+                        class="px-4 md:px-6 py-3 md:py-4 text-left text-xs md:text-sm font-semibold whitespace-nowrap"
+                      >
+                        Orbital Period
+                      </th>
+                      <th
+                        class="px-4 md:px-6 py-3 md:py-4 text-left text-xs md:text-sm font-semibold whitespace-nowrap"
+                      >
+                        Moons
+                      </th>
+                      <th
+                        class="px-4 md:px-6 py-3 md:py-4 text-left text-xs md:text-sm font-semibold whitespace-nowrap"
+                      >
+                        Type
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody
+                    id="planet-comparison-tbody"
+                    class="divide-y divide-slate-700"
+                  >
+                    <!-- Mercury -->
+                    <tr class="hover:bg-slate-800/30 transition-colors">
+                      <td
+                        class="px-4 md:px-6 py-3 md:py-4 sticky left-0 bg-slate-800 z-10"
+                      >
+                        <div class="flex items-center space-x-2 md:space-x-3">
+                          <div
+                            class="w-6 h-6 md:w-8 md:h-8 rounded-full flex-shrink-0"
+                            style="background-color: #eab308"
+                          ></div>
+                          <span
+                            class="font-semibold text-sm md:text-base whitespace-nowrap"
+                            >Mercury</span
+                          >
+                        </div>
+                      </td>
+                      <td
+                        class="px-4 md:px-6 py-3 md:py-4 text-slate-300 text-sm md:text-base whitespace-nowrap"
+                      >
+                        0.39
+                      </td>
+                      <td
+                        class="px-4 md:px-6 py-3 md:py-4 text-slate-300 text-sm md:text-base whitespace-nowrap"
+                      >
+                        4,879
+                      </td>
+                      <td
+                        class="px-4 md:px-6 py-3 md:py-4 text-slate-300 text-sm md:text-base whitespace-nowrap"
+                      >
+                        0.055
+                      </td>
+                      <td
+                        class="px-4 md:px-6 py-3 md:py-4 text-slate-300 text-sm md:text-base whitespace-nowrap"
+                      >
+                        88 days
+                      </td>
+                      <td
+                        class="px-4 md:px-6 py-3 md:py-4 text-slate-300 text-sm md:text-base whitespace-nowrap"
+                      >
+                        0
+                      </td>
+                      <td class="px-4 md:px-6 py-3 md:py-4 whitespace-nowrap">
+                        <span
+                          class="px-2 py-1 rounded text-xs bg-orange-500/50 text-orange-200"
+                          >Terrestrial</span
+                        >
+                      </td>
+                    </tr>
+                    <!-- Venus -->
+                    <tr class="hover:bg-slate-800/30 transition-colors">
+                      <td
+                        class="px-4 md:px-6 py-3 md:py-4 sticky left-0 bg-slate-800 z-10"
+                      >
+                        <div class="flex items-center space-x-2 md:space-x-3">
+                          <div
+                            class="w-6 h-6 md:w-8 md:h-8 rounded-full flex-shrink-0"
+                            style="background-color: #f97316"
+                          ></div>
+                          <span
+                            class="font-semibold text-sm md:text-base whitespace-nowrap"
+                            >Venus</span
+                          >
+                        </div>
+                      </td>
+                      <td
+                        class="px-4 md:px-6 py-3 md:py-4 text-slate-300 text-sm md:text-base whitespace-nowrap"
+                      >
+                        0.72
+                      </td>
+                      <td
+                        class="px-4 md:px-6 py-3 md:py-4 text-slate-300 text-sm md:text-base whitespace-nowrap"
+                      >
+                        12,104
+                      </td>
+                      <td
+                        class="px-4 md:px-6 py-3 md:py-4 text-slate-300 text-sm md:text-base whitespace-nowrap"
+                      >
+                        0.815
+                      </td>
+                      <td
+                        class="px-4 md:px-6 py-3 md:py-4 text-slate-300 text-sm md:text-base whitespace-nowrap"
+                      >
+                        225 days
+                      </td>
+                      <td
+                        class="px-4 md:px-6 py-3 md:py-4 text-slate-300 text-sm md:text-base whitespace-nowrap"
+                      >
+                        0
+                      </td>
+                      <td class="px-4 md:px-6 py-3 md:py-4 whitespace-nowrap">
+                        <span
+                          class="px-2 py-1 rounded text-xs bg-orange-500/50 text-orange-200"
+                          >Terrestrial</span
+                        >
+                      </td>
+                    </tr>
+                    <!-- Earth -->
+                    <tr
+                      class="hover:bg-slate-800/30 transition-colors bg-blue-500/5"
+                    >
+                      <td
+                        class="px-4 md:px-6 py-3 md:py-4 sticky left-0 bg-slate-800 z-10"
+                      >
+                        <div class="flex items-center space-x-2 md:space-x-3">
+                          <div
+                            class="w-6 h-6 md:w-8 md:h-8 rounded-full flex-shrink-0"
+                            style="background-color: #3b82f6"
+                          ></div>
+                          <span
+                            class="font-semibold text-sm md:text-base whitespace-nowrap"
+                            >Earth</span
+                          >
+                        </div>
+                      </td>
+                      <td
+                        class="px-4 md:px-6 py-3 md:py-4 text-slate-300 text-sm md:text-base whitespace-nowrap"
+                      >
+                        1.00
+                      </td>
+                      <td
+                        class="px-4 md:px-6 py-3 md:py-4 text-slate-300 text-sm md:text-base whitespace-nowrap"
+                      >
+                        12,742
+                      </td>
+                      <td
+                        class="px-4 md:px-6 py-3 md:py-4 text-slate-300 text-sm md:text-base whitespace-nowrap"
+                      >
+                        1.000
+                      </td>
+                      <td
+                        class="px-4 md:px-6 py-3 md:py-4 text-slate-300 text-sm md:text-base whitespace-nowrap"
+                      >
+                        365.2 days
+                      </td>
+                      <td
+                        class="px-4 md:px-6 py-3 md:py-4 text-slate-300 text-sm md:text-base whitespace-nowrap"
+                      >
+                        1
+                      </td>
+                      <td class="px-4 md:px-6 py-3 md:py-4 whitespace-nowrap">
+                        <span
+                          class="px-2 py-1 rounded text-xs bg-blue-500/50 text-blue-200"
+                          >Terrestrial</span
+                        >
+                      </td>
+                    </tr>
+                    <!-- Mars -->
+                    <tr class="hover:bg-slate-800/30 transition-colors">
+                      <td
+                        class="px-4 md:px-6 py-3 md:py-4 sticky left-0 bg-slate-800 z-10"
+                      >
+                        <div class="flex items-center space-x-2 md:space-x-3">
+                          <div
+                            class="w-6 h-6 md:w-8 md:h-8 rounded-full flex-shrink-0"
+                            style="background-color: #ef4444"
+                          ></div>
+                          <span
+                            class="font-semibold text-sm md:text-base whitespace-nowrap"
+                            >Mars</span
+                          >
+                        </div>
+                      </td>
+                      <td
+                        class="px-4 md:px-6 py-3 md:py-4 text-slate-300 text-sm md:text-base whitespace-nowrap"
+                      >
+                        1.52
+                      </td>
+                      <td
+                        class="px-4 md:px-6 py-3 md:py-4 text-slate-300 text-sm md:text-base whitespace-nowrap"
+                      >
+                        6,779
+                      </td>
+                      <td
+                        class="px-4 md:px-6 py-3 md:py-4 text-slate-300 text-sm md:text-base whitespace-nowrap"
+                      >
+                        0.107
+                      </td>
+                      <td
+                        class="px-4 md:px-6 py-3 md:py-4 text-slate-300 text-sm md:text-base whitespace-nowrap"
+                      >
+                        687 days
+                      </td>
+                      <td
+                        class="px-4 md:px-6 py-3 md:py-4 text-slate-300 text-sm md:text-base whitespace-nowrap"
+                      >
+                        2
+                      </td>
+                      <td class="px-4 md:px-6 py-3 md:py-4 whitespace-nowrap">
+                        <span
+                          class="px-2 py-1 rounded text-xs bg-red-500/50 text-red-200"
+                          >Terrestrial</span
+                        >
+                      </td>
+                    </tr>
+                    <!-- Jupiter -->
+                    <tr class="hover:bg-slate-800/30 transition-colors">
+                      <td
+                        class="px-4 md:px-6 py-3 md:py-4 sticky left-0 bg-slate-800 z-10"
+                      >
+                        <div class="flex items-center space-x-2 md:space-x-3">
+                          <div
+                            class="w-6 h-6 md:w-8 md:h-8 rounded-full flex-shrink-0"
+                            style="background-color: #fb923c"
+                          ></div>
+                          <span
+                            class="font-semibold text-sm md:text-base whitespace-nowrap"
+                            >Jupiter</span
+                          >
+                        </div>
+                      </td>
+                      <td
+                        class="px-4 md:px-6 py-3 md:py-4 text-slate-300 text-sm md:text-base whitespace-nowrap"
+                      >
+                        5.20
+                      </td>
+                      <td
+                        class="px-4 md:px-6 py-3 md:py-4 text-slate-300 text-sm md:text-base whitespace-nowrap"
+                      >
+                        139,820
+                      </td>
+                      <td
+                        class="px-4 md:px-6 py-3 md:py-4 text-slate-300 text-sm md:text-base whitespace-nowrap"
+                      >
+                        317.8
+                      </td>
+                      <td
+                        class="px-4 md:px-6 py-3 md:py-4 text-slate-300 text-sm md:text-base whitespace-nowrap"
+                      >
+                        11.9 years
+                      </td>
+                      <td
+                        class="px-4 md:px-6 py-3 md:py-4 text-slate-300 text-sm md:text-base whitespace-nowrap"
+                      >
+                        79
+                      </td>
+                      <td class="px-4 md:px-6 py-3 md:py-4 whitespace-nowrap">
+                        <span
+                          class="px-2 py-1 rounded text-xs bg-purple-500/50 text-purple-200"
+                          >Gas Giant</span
+                        >
+                      </td>
+                    </tr>
+                    <!-- Saturn -->
+                    <tr class="hover:bg-slate-800/30 transition-colors">
+                      <td
+                        class="px-4 md:px-6 py-3 md:py-4 sticky left-0 bg-slate-800 z-10"
+                      >
+                        <div class="flex items-center space-x-2 md:space-x-3">
+                          <div
+                            class="w-6 h-6 md:w-8 md:h-8 rounded-full flex-shrink-0"
+                            style="background-color: #facc15"
+                          ></div>
+                          <span
+                            class="font-semibold text-sm md:text-base whitespace-nowrap"
+                            >Saturn</span
+                          >
+                        </div>
+                      </td>
+                      <td
+                        class="px-4 md:px-6 py-3 md:py-4 text-slate-300 text-sm md:text-base whitespace-nowrap"
+                      >
+                        9.58
+                      </td>
+                      <td
+                        class="px-4 md:px-6 py-3 md:py-4 text-slate-300 text-sm md:text-base whitespace-nowrap"
+                      >
+                        116,460
+                      </td>
+                      <td
+                        class="px-4 md:px-6 py-3 md:py-4 text-slate-300 text-sm md:text-base whitespace-nowrap"
+                      >
+                        95.2
+                      </td>
+                      <td
+                        class="px-4 md:px-6 py-3 md:py-4 text-slate-300 text-sm md:text-base whitespace-nowrap"
+                      >
+                        29.5 years
+                      </td>
+                      <td
+                        class="px-4 md:px-6 py-3 md:py-4 text-slate-300 text-sm md:text-base whitespace-nowrap"
+                      >
+                        82
+                      </td>
+                      <td class="px-4 md:px-6 py-3 md:py-4 whitespace-nowrap">
+                        <span
+                          class="px-2 py-1 rounded text-xs bg-yellow-500/50 text-yellow-200"
+                          >Gas Giant</span
+                        >
+                      </td>
+                    </tr>
+                    <!-- Uranus -->
+                    <tr class="hover:bg-slate-800/30 transition-colors">
+                      <td
+                        class="px-4 md:px-6 py-3 md:py-4 sticky left-0 bg-slate-800 z-10"
+                      >
+                        <div class="flex items-center space-x-2 md:space-x-3">
+                          <div
+                            class="w-6 h-6 md:w-8 md:h-8 rounded-full flex-shrink-0"
+                            style="background-color: #06b6d4"
+                          ></div>
+                          <span
+                            class="font-semibold text-sm md:text-base whitespace-nowrap"
+                            >Uranus</span
+                          >
+                        </div>
+                      </td>
+                      <td
+                        class="px-4 md:px-6 py-3 md:py-4 text-slate-300 text-sm md:text-base whitespace-nowrap"
+                      >
+                        19.22
+                      </td>
+                      <td
+                        class="px-4 md:px-6 py-3 md:py-4 text-slate-300 text-sm md:text-base whitespace-nowrap"
+                      >
+                        50,724
+                      </td>
+                      <td
+                        class="px-4 md:px-6 py-3 md:py-4 text-slate-300 text-sm md:text-base whitespace-nowrap"
+                      >
+                        14.5
+                      </td>
+                      <td
+                        class="px-4 md:px-6 py-3 md:py-4 text-slate-300 text-sm md:text-base whitespace-nowrap"
+                      >
+                        84.0 years
+                      </td>
+                      <td
+                        class="px-4 md:px-6 py-3 md:py-4 text-slate-300 text-sm md:text-base whitespace-nowrap"
+                      >
+                        27
+                      </td>
+                      <td class="px-4 md:px-6 py-3 md:py-4 whitespace-nowrap">
+                        <span
+                          class="px-2 py-1 rounded text-xs bg-cyan-500/50 text-cyan-200"
+                          >Ice Giant</span
+                        >
+                      </td>
+                    </tr>
+                    <!-- Neptune -->
+                    <tr class="hover:bg-slate-800/30 transition-colors">
+                      <td
+                        class="px-4 md:px-6 py-3 md:py-4 sticky left-0 bg-slate-800 z-10"
+                      >
+                        <div class="flex items-center space-x-2 md:space-x-3">
+                          <div
+                            class="w-6 h-6 md:w-8 md:h-8 rounded-full flex-shrink-0"
+                            style="background-color: #2563eb"
+                          ></div>
+                          <span
+                            class="font-semibold text-sm md:text-base whitespace-nowrap"
+                            >Neptune</span
+                          >
+                        </div>
+                      </td>
+                      <td
+                        class="px-4 md:px-6 py-3 md:py-4 text-slate-300 text-sm md:text-base whitespace-nowrap"
+                      >
+                        30.05
+                      </td>
+                      <td
+                        class="px-4 md:px-6 py-3 md:py-4 text-slate-300 text-sm md:text-base whitespace-nowrap"
+                      >
+                        49,244
+                      </td>
+                      <td
+                        class="px-4 md:px-6 py-3 md:py-4 text-slate-300 text-sm md:text-base whitespace-nowrap"
+                      >
+                        17.1
+                      </td>
+                      <td
+                        class="px-4 md:px-6 py-3 md:py-4 text-slate-300 text-sm md:text-base whitespace-nowrap"
+                      >
+                        164.8 years
+                      </td>
+                      <td
+                        class="px-4 md:px-6 py-3 md:py-4 text-slate-300 text-sm md:text-base whitespace-nowrap"
+                      >
+                        14
+                      </td>
+                      <td class="px-4 md:px-6 py-3 md:py-4 whitespace-nowrap">
+                        <span
+                          class="px-2 py-1 rounded text-xs bg-blue-500/50 text-blue-200"
+                          >Ice Giant</span
+                        >
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script type="module" src="./assets/js/index.js"></script>
+  </body>
+</html>
