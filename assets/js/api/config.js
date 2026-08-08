@@ -5,9 +5,9 @@ export const API_CONFIG = {
   },
   nasa: {
     baseUrl: 'https://api.nasa.gov/planetary/',
-    apiKey: 'DEMO_KEY',
+    apiKey: 'G5HOVZ1cRzEYsV7CAIJxIPyYRneZEvHl0oE1TwyD',
   },
   launchLibrary: {
-    baseUrl: 'https://ll.thespacedevs.com/2.2.0/',
+    baseUrl: 'https://lldev.thespacedevs.com/2.3.0/',
   },
 };
