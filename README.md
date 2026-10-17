@@ -29,7 +29,7 @@ assets/js/
 
 `JS_NOTES.md` holds my study notes on the patterns used here (destructuring, optional chaining, `dataset`, template literals, lookup tables).
 
-> The NASA `DEMO_KEY`-style keys are rate limited; use your own key in `config.js` if requests fail.
+> Uses NASA's public `DEMO_KEY` (rate limited). For heavier use, get a free key at https://api.nasa.gov and set it in `assets/js/api/config.js`.
 
 ## Run locally
 
